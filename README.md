@@ -8,7 +8,7 @@
 4. [Demo]()
 5. [Questions]()
 
-## Descrption.
+## Description.
 A command-line application built from scratch to manage a company's employee database.
 
 GIVEN a command-line application that accepts user input
