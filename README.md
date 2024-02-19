@@ -3,7 +3,7 @@
 ## Table of Contents
 
 1. [Description](https://github.com/EChrist01/SQL-employee-tracker#description)
-2. [Installation]()
+2. [Installation](https://github.com/EChrist01/SQL-employee-tracker/blob/main/README.md#installation-instructions)
 3. [Usage]()
 4. [Demo]()
 5. [Questions]()
