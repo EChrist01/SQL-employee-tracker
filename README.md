@@ -38,7 +38,7 @@ This application uses node.js, Mysql2, and Javascript
 - select your inputs.
 
 ## Demo.
-
+https://watch.screencastify.com/v/woT1H7qx9RxGnobg5X2x
 ![Screenshot 2024-02-19 155312](https://github.com/EChrist01/SQL-employee-tracker/assets/146894896/16ec1d1e-6fce-4145-bdb4-06f21ff4a5a4)
 
 ## Questions
