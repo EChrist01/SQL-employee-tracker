@@ -5,26 +5,39 @@ const inquirer = require("inquirer");
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+// Middleware to parse incoming requests
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+// Database connection
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "root",
-  database: "employee_db",
+  password: "#Ec629746@!0", 
+  database: "employee_db"
 });
 
+// Connect to the database
+db.connect((err) => {
+  if (err) {
+    console.error("Error connecting to database:", err);
+    return;
+  }
+  console.log("Connected to the database");
+});
+
+// Seed the database with initial data
 function seedDatabase() {
   const seedQueries = [
     "INSERT INTO department (name) VALUES ('Electrical'),('Mechanical'),('Structural'),('Chemical')",
     "INSERT INTO role (title, name, salary, department_id) VALUES ('Electrical Engineer', 'John Doe', 114000, 1),('Mechanical Engineer', 'Jane Smith', 111000, 2),('Structural Engineer', 'Michael Johnson', 120000, 3),('Chemical Engineer', 'Emily Brown', 117000, 4)"
   ];
 
+  // Execute each seed query
   seedQueries.forEach((query) => {
     db.query(query, (err, results) => {
       if (err) {
-        console.error(err);
+        console.error("Error seeding database:", err);
         return;
       }
       console.log("Database seeded successfully!");
@@ -32,6 +45,7 @@ function seedDatabase() {
   });
 }
 
+// Prompt the user with options
 function promptUser() {
   inquirer
     .prompt([
@@ -51,6 +65,7 @@ function promptUser() {
       },
     ])
     .then(function (data) {
+      // Based on user choice, call respective function
       if (data.mainOption === "View all departments") {
         displayDepartments();
       } else if (data.mainOption === "View all roles") {
@@ -69,11 +84,12 @@ function promptUser() {
     });
 }
 
+// Display all departments
 function displayDepartments() {
   const query = "SELECT * FROM department";
   db.query(query, (err, results) => {
     if (err) {
-      console.error(err);
+      console.error("Error fetching departments:", err);
       return;
     }
     console.log();
@@ -82,11 +98,12 @@ function displayDepartments() {
   });
 }
 
+// Display all roles
 function displayRoles() {
   const query = "SELECT * FROM role";
   db.query(query, (err, results) => {
     if (err) {
-      console.error(err);
+      console.error("Error fetching roles:", err);
       return;
     }
     console.log();
@@ -95,11 +112,12 @@ function displayRoles() {
   });
 }
 
+// Display all employees
 function displayEmployees() {
   const query = "SELECT * FROM employee";
   db.query(query, (err, results) => {
     if (err) {
-      console.error(err);
+      console.error("Error fetching employees:", err);
       return;
     }
     console.log();
@@ -108,6 +126,7 @@ function displayEmployees() {
   });
 }
 
+// Add a new department
 function addDepartment() {
   inquirer
     .prompt([
@@ -122,7 +141,7 @@ function addDepartment() {
       const values = [data.newDepartment];
       db.query(query, values, (err, results) => {
         if (err) {
-          console.error(err);
+          console.error("Error adding department:", err);
           return;
         }
         console.log("Department added successfully!");
@@ -131,6 +150,7 @@ function addDepartment() {
     });
 }
 
+// Add a new role
 function addRole() {
   inquirer
     .prompt([
@@ -156,7 +176,7 @@ function addRole() {
       const values = [data.roleName, data.roleSalary, data.roleDepartment];
       db.query(query, values, (err, results) => {
         if (err) {
-          console.error(err);
+          console.error("Error adding role:", err);
           return;
         }
         console.log("Role added successfully!");
@@ -165,6 +185,7 @@ function addRole() {
     });
 }
 
+// Add a new employee
 function addEmployee() {
   inquirer
     .prompt([
@@ -200,7 +221,7 @@ function addEmployee() {
       ];
       db.query(query, values, (err, results) => {
         if (err) {
-          console.error(err);
+          console.error("Error adding employee:", err);
           return;
         }
         console.log("Employee added successfully!");
@@ -209,8 +230,8 @@ function addEmployee() {
     });
 }
 
+// Update an employee's role
 function updateRole() {
-  console.log("hit updateRole function");
   inquirer
     .prompt([
       {
@@ -229,7 +250,7 @@ function updateRole() {
       const values = [data.newRoleId, data.employeeId];
       db.query(query, values, (err, results) => {
         if (err) {
-          console.error(err);
+          console.error("Error updating employee role:", err);
           return;
         }
         console.log("Employee role updated successfully!");
@@ -238,8 +259,9 @@ function updateRole() {
     });
 }
 
+// Start the Express server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   seedDatabase(); // Seed the database when the server starts
-  promptUser(); // Prompt the user after seeding
+  promptUser(); // Prompt user after seeding
 });
