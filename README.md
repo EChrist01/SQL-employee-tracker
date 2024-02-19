@@ -30,13 +30,18 @@ WHEN I choose to update an employee role
 THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 
 ## Installation Instructions.
-This application uses .
+This application uses node.js, Mysql2, and Javascript 
 
 ## Usage Information.
-Page link will open the website, 
+- Clone this repo, then navigate to the cloned folder open the terminal in that folder and run <$ npm i> to install the npm dependencies.
+- in that same terminal run <$ npm start> or <$ node server.js>
+- select your inputs.
 
 ## Demo.
 
+![Screenshot 2024-02-19 155312](https://github.com/EChrist01/SQL-employee-tracker/assets/146894896/16ec1d1e-6fce-4145-bdb4-06f21ff4a5a4)
+
 ## Questions
 Github profile: 
+
 Email: Ethanchrist02@gmail.com
