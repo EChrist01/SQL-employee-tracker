@@ -5,7 +5,7 @@
 1. [Description](https://github.com/EChrist01/SQL-employee-tracker#description)
 2. [Installation](https://github.com/EChrist01/SQL-employee-tracker/blob/main/README.md#installation-instructions)
 3. [Usage](https://github.com/EChrist01/SQL-employee-tracker/blob/main/README.md#usage-information)
-4. [Demo]()
+4. [Demo](https://github.com/EChrist01/SQL-employee-tracker/blob/main/README.md#demo)
 5. [Questions]()
 
 ## Description.
