@@ -1,13 +1,5 @@
-const express = require("express");
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
-
-const PORT = process.env.PORT || 3001;
-const app = express();
-
-// Middleware to parse incoming requests
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
 
 // Database connection
 const db = mysql.createConnection({
@@ -24,13 +16,15 @@ db.connect((err) => {
     return;
   }
   console.log("Connected to the database");
+  seedDatabase(); // Seed the database when the connection is established
+  promptUser(); // Prompt user after seeding
 });
 
 // Seed the database with initial data
 function seedDatabase() {
   const seedQueries = [
     "INSERT INTO department (name) VALUES ('Electrical'),('Mechanical'),('Structural'),('Chemical')",
-    "INSERT INTO role (title, name, salary, department_id) VALUES ('Electrical Engineer', 'John Doe', 114000, 1),('Mechanical Engineer', 'Jane Smith', 111000, 2),('Structural Engineer', 'Michael Johnson', 120000, 3),('Chemical Engineer', 'Emily Brown', 117000, 4)"
+    "INSERT INTO role (title, first_name, last_name, salary, department_id) VALUES ('Electrical Engineer', 'John', 'Doe', 114000, 1),('Mechanical Engineer', 'Jane', 'Smith', 111000, 2),('Structural Engineer', 'Michael', 'Johnson', 120000, 3),('Chemical Engineer', 'Emily', 'Brown', 117000, 4)"
   ];
 
   // Execute each seed query
@@ -219,6 +213,8 @@ function addEmployee() {
         data.employeeRole,
         data.employeeManager,
       ];
+      console.log("Query:", query);
+      console.log("Values:", values);
       db.query(query, values, (err, results) => {
         if (err) {
           console.error("Error adding employee:", err);
@@ -258,10 +254,3 @@ function updateRole() {
       });
     });
 }
-
-// Start the Express server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  seedDatabase(); // Seed the database when the server starts
-  promptUser(); // Prompt user after seeding
-});
