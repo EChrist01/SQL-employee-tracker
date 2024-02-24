@@ -24,7 +24,7 @@ db.connect((err) => {
 function seedDatabase() {
   const seedQueries = [
     "INSERT INTO department (name) VALUES ('Electrical'),('Mechanical'),('Structural'),('Chemical')",
-    "INSERT INTO role (title, first_name, last_name, salary, department_id) VALUES ('Electrical Engineer', 'John', 'Doe', 114000, 1),('Mechanical Engineer', 'Jane', 'Smith', 111000, 2),('Structural Engineer', 'Michael', 'Johnson', 120000, 3),('Chemical Engineer', 'Emily', 'Brown', 117000, 4)"
+    "INSERT INTO role (title, salary, department_id) VALUES ('Electrical Engineer', 114000, 1),('Mechanical Engineer', 111000, 2),('Structural Engineer', 120000, 3),('Chemical Engineer', 117000, 4)"
   ];
 
   // Execute each seed query
