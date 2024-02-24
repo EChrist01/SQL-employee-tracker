@@ -198,23 +198,16 @@ function addEmployee() {
         message: "Enter id of their role:",
         name: "employeeRole",
       },
-      {
-        type: "input",
-        message: "Enter the manager's id of the new employee:",
-        name: "employeeManager",
-      },
     ])
     .then(function (data) {
       const query =
-        "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)";
+        "INSERT INTO employee (first_name, last_name, role_id) VALUES (?, ?, ?, ?)";
       const values = [
         data.employeeFirst,
         data.employeeLast,
         data.employeeRole,
         data.employeeManager,
       ];
-      console.log("Query:", query);
-      console.log("Values:", values);
       db.query(query, values, (err, results) => {
         if (err) {
           console.error("Error adding employee:", err);
